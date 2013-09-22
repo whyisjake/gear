@@ -2,11 +2,12 @@
 
 function gear_init() {
 	register_post_type( 'gear', array(
+		'taxonomies'		  => array( 'category', 'post_tag' ),
 		'hierarchical'        => false,
 		'public'              => true,
 		'show_in_nav_menus'   => true,
 		'show_ui'             => true,
-		'supports'            => array( 'title', 'editor' ),
+		'supports'            => array( 'title', 'editor', 'custom-fields' ),
 		'has_archive'         => true,
 		'query_var'           => true,
 		'rewrite'             => true,

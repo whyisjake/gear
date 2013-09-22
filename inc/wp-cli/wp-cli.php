@@ -18,47 +18,136 @@ class GEAR_WP_CLI_Command extends WP_CLI_Command {
 	 * 
 	 */
 	public function make_gear_products_import() {
-		if ( file_exists( 'rei.xml' ) ) {
-			$xml = simplexml_load_file('rei.xml');
-		} else {
-			exit('Failed to open rei.xml.');
-		}
-
-		$products = $xml->Product;
-
-		foreach ($products as $product) {
+		WP_CLI::line( 'GO!' );
+		$rei = file_get_contents( get_stylesheet_directory_uri() . '/inc/wp-cli/rei.xml' );
+		$xml = simplexml_load_string( $rei );
+		foreach ($xml->Product as $products ) {
 			$post = array(
-				'post_title'    => $product['title'],
-				'post_name'		=> $product['name'],
+				'post_title'    => $products->Product_Name,
 				'post_type'  	=> 'gear',
 				'post_status'   => 'publish',
 				'post_author'   => 0,
+				'post_content'	=> $products->Long_Description,
+				'post_excerpt'	=> $products->Short_Description,
 			);
-			$post_id = wp_insert_post( $post );
-			if ( $post_id ) {
-				WP_CLI::line( get_the_title( $post_id ) );
+
+			$id = wp_insert_post( $post );
+
+			if ( $id ) {
+				WP_CLI::success( get_the_title( $id ) );
+			} elseif ( is_wp_error( $id ) ) {
+				WP_CLI::warning( $products->Product_Name );
 			}
-			// $title = get_the_title( $post_id );
-			// WP_CLI::line('☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆');
-			// if ( !$post_id ) {
-			// 	WP_CLI::warning( "Couldn't insert post... Sorry about that." );
-			// } else {
-			// 	WP_CLI::success( "Inserted product: " . $title  );
+
+			$terms = wp_set_object_terms( $id, array( $products->Category, $products->SubCategory ), 'category', true );
+
+			$keys = array( 'SKU',
+				'Manufacturer_Id',
+				'Brand_Name',
+				'Thumb_URL',
+				'Medium_Image_URL',
+				'Image_URL',
+				'Buy_Link',
+				'Retail_Price',
+				'Sale_Price',
+				'Brand_Page_Link',
+				'Brand_Logo_Image',
+				'Product_Page_View_Tracking',
+				'Product_Content_Widget',
+				'Google_Categorization'
+				);
+			WP_CLI::line('Setting up ' . get_the_title( $id ) );
+			WP_CLI::line('| Post ID ' . $id );
+			$sku = add_post_meta( $id, $key, $products->SKU );
+			WP_CLI::line('| Post SKU' . ( $sku ) ? get_post_meta( $id, 'SKU', true ) : 'Nope...' );
+			// foreach ( $keys as $key ) {
+			// 	WP_CLI::line( $products->$key );
+			// 	$meta = update_post_meta( $id, $key, $products->$key, true );
+			// 	if ( $meta ) {
+			// 		WP_CLI::success( $key );
+			// 	} else {
+			// 		WP_CLI::warning( 'Didn\'t add ' . $key );
+			// 	}
 			// }
-			// $meta_id = update_post_meta( $post_id, 'url', esc_url( $product['url'] ) );
-			// if ( !$meta_id ) {
-			// 	WP_CLI::warning( "Didn't add the URL meta..." );
-			// } else {
-			// 	WP_CLI::success( "Added " . $product['url'] . " to " . $title );
-			// }
-			// $bitly = make_bitly_url( esc_url_raw ($product['url'] ) );
-			// $bitlyurl = update_post_meta( $post_id, 'bitly_url', $bitly );
-			// if ( !$bitlyurl ) {
-			// 	WP_CLI::warning( "Didn't add the Bit.ly URL meta..." );
-			// } else {
-			// 	WP_CLI::success( "Added a shorturl of " . $bitly . " to " . $title );
-			// }
-			// WP_CLI::line('');
+
 		}
+	}
+
+	/**
+	 * Delete all of the Makers in the makers custom post type
+	 *
+	 * @subcommand mjolnir
+	 * 
+	 */
+	public function mf_delete_makers( $args, $assoc_args ) {
+
+		WP_CLI::line( ' 
+                                                  zee.                      
+        z**=.                                  .P"  $                       
+         %   ^c                               z"   $                        
+          b    %                             d    4"                        
+          4     $            ....           4"    $                         
+           F     L       .P"       "%.      $     $                         
+           $     4     e"             "c    "     $                         
+           $      F  z"                 *  4      $                         
+           P      $ d                    3.$      $                         
+           %      $d       ..eeeec..      *$      \'b                        
+          d       $%   .e$*c d" ".z**$%.   $       $                        
+          F       $  e" $   *F   $   ^F.db.$        b                       
+         J        $d\" ^$   4b   $    $  3/$        *                       
+         $        $*$   $c  P *P" * ."F  .$$         b                      
+        4F        $ $c .EeP""      ^C$$..*F F        $                      
+        J         $ $.*"-"*.      ."    "b$ F        \'r                     
+        $         *"$   zc. ..  -"..-""\  $$%         $                     
+        $          $      ..  L P  ebe    4$          $                     
+        $          ^F   d%*$J%3 $ *$* "   4F          $                     
+        *          4b       @   3 ^r      4$          $                     
+        4          d$.          4         $3.        4F                     
+         L         $$*.                  %$ $        J                      
+         $        d $ $      -   ^.     P $c $       $                      
+          r      z".$L L    .$%..*$    J  $P. *.    d                       
+          "     z" P$$ ^%  z"      ".  L d$$"c "e  z%                       
+           *  .P .*$$$  "*"   .$c        $$$$.b  ^$"                        
+            *$  dL$$$$r ^4. ./" ""%..r"  $$$$$$J$e"                         
+             *$b$$$$$$F        ""        $$$$$$$P                           
+              ^$$$$$$$$                  $$$$$"                             
+                 "*$$$$                  $"                                 
+                      \'                 4                                   
+                       *  $         .$  F                                   
+                        % 4F       .$  "                                    
+                          *$%     .$dr                                      
+                            *.    .*                                        
+                              ".." ' );
+
+		$args = array(
+			'posts_per_page' => 2000,
+			'post_type' => 'gear',
+			'post_status' => 'any',
+
+			// Prevent new posts from affecting the order
+			'orderby' => 'ID',
+			'order' => 'ASC',
+
+			// Speed this up
+			'no_found_rows' => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+		);
+
+		// Get the first set of posts
+		$query = new WP_Query( $args );
+
+		while ( $query->have_posts() ) : $query->the_post();
+		
+		$title = get_the_title( get_the_ID() );
+
+		$del = wp_delete_post( get_the_ID() );
+
+		if ( $del ) {
+			WP_CLI::success( 'Deleted ' . $title );
+		} else {
+			WP_CLI::warning( 'Failed to delete ' . $title );
+		}
+		endwhile;
 	}
 }

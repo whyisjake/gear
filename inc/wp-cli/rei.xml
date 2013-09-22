@@ -24,7 +24,14 @@
 		<Product_Content_Widget>&lt;script type=&quot;text/javascript&quot; src=&quot;http://www.avantlink.com/apcw.php?mode=5&amp;amp;pw=148237&amp;amp;df=115&amp;amp;sku=776421&amp;amp;link=&amp;amp;tabs=-Details&quot;&gt;&lt;/script&gt;</Product_Content_Widget>
 		<Google_Categorization></Google_Categorization>
 		<Extended_Xml_Attributes>
-			<variants><variant><sku>7764210014</sku><vendor_sku>9781565126053</vendor_sku><retail_price>14.95</retail_price><sale_price>14.95</sale_price></variant></variants>
+			<variants>
+				<variant>
+					<sku>7764210014</sku>
+					<vendor_sku>9781565126053</vendor_sku>
+					<retail_price>14.95</retail_price>
+					<sale_price>14.95</sale_price>
+				</variant>
+			</variants>
 		</Extended_Xml_Attributes>
 	</Product>
 	<Product>
