@@ -28,6 +28,8 @@ $meta = get_post_meta( get_the_ID() );
 
 		<img src="<?php echo $meta['Image_URL'][0]; ?>" alt="<?php esc_attr( the_title() ); ?>">
 		<?php echo ( $meta['Product_Content_Widget'][0] ) ?>
+
+		<a href="<?php echo esc_url( $meta['Buy_Link'][0] ); ?>" class="btn btn-primary" title="<?php esc_attr( the_title() ); ?>">Buy Now</a>
 				
 		<?php the_content(); ?>
 		<?php
