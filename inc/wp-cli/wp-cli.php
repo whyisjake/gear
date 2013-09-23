@@ -47,6 +47,8 @@ class GEAR_WP_CLI_Command extends WP_CLI_Command {
 
 			$the_tags = wp_set_object_terms( $id, $tags, 'post_tag', true );
 
+			$the_tags = wp_set_object_terms( $id, $products->BrandName, 'post_tag', true );
+
 			$keys = array( 'SKU',
 				'Manufacturer_Id',
 				'Brand_Name',
