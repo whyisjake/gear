@@ -2,7 +2,7 @@
 /**
  * The template used for displaying page content in page.php
  *
- * @package Gear
+ * @package web2feel
  */
 ?>
 
@@ -15,10 +15,10 @@
 		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'gear' ),
+				'before' => '<div class="page-links">' . __( 'Pages:', 'web2feel' ),
 				'after'  => '</div>',
 			) );
 		?>
 	</div><!-- .entry-content -->
-	<?php edit_post_link( __( 'Edit', 'gear' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
+	<?php edit_post_link( __( 'Edit', 'web2feel' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
 </article><!-- #post-## -->

@@ -2,19 +2,29 @@
 /**
  * The template for displaying Search Results pages.
  *
- * @package Gear
+ * @package web2feel
  */
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
+<div class="page-head">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h3> <?php printf( __( 'You searched for: %s', 'web2feel' ), '<span>' . get_search_query() . '</span>' ); ?> </h3>
+				<p> Search results </p>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="container">	
+	<div class="row">
+	<section id="primary" class="content-area col-sm-8">
 		<main id="main" class="site-main" role="main">
 
 		<?php if ( have_posts() ) : ?>
-
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'gear' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -23,7 +33,7 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 
-			<?php gear_content_nav( 'nav-below' ); ?>
+			<?php web2feel_content_nav( 'nav-below' ); ?>
 
 		<?php else : ?>
 
@@ -35,4 +45,6 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php get_sidebar(); ?>
+	</div>
+</div>
 <?php get_footer(); ?>

@@ -3,17 +3,17 @@
  * Jetpack Compatibility File
  * See: http://jetpack.me/
  *
- * @package Gear
+ * @package web2feel
  */
 
 /**
  * Add theme support for Infinite Scroll.
  * See: http://jetpack.me/support/infinite-scroll/
  */
-function gear_jetpack_setup() {
+function web2feel_jetpack_setup() {
 	add_theme_support( 'infinite-scroll', array(
 		'container' => 'main',
 		'footer'    => 'page',
 	) );
 }
-add_action( 'after_setup_theme', 'gear_jetpack_setup' );
+add_action( 'after_setup_theme', 'web2feel_jetpack_setup' );

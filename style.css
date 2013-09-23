@@ -1,20 +1,20 @@
 /*
-Theme Name: Gear
-Theme URI: http://underscores.me/
-Author: Jake Spurlock
-Author URI: http://underscores.me/
-Description: Custom theme: Gear developed by, Jake
+Theme Name: Revera
+Theme URI: http://www.fabthemes.com/revera/
+Author: Fabthemes
+Author URI: www.fabthemes.com
+Description: Description
 Version: 1.0
 License: GNU General Public License
 License URI: license.txt
-Text Domain: gear
+Text Domain: fabthemes
 Domain Path: /languages/
 Tags:
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 
- Gear is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic, Inc.
+ fabthemes is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic, Inc.
 
 Resetting and rebuilding styles have been helped along thanks to the fine work of
 Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
@@ -60,7 +60,6 @@ figcaption,
 figure,
 footer,
 header,
-main,
 nav,
 section {
 	display: block;
@@ -111,7 +110,7 @@ textarea {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,h2,h3,h4,h5,h6 {
 	clear: both;
 }
 hr {
@@ -164,9 +163,9 @@ pre {
 	font-size: 1.5rem;
 	line-height: 1.6;
 	margin-bottom: 1.6em;
-	max-width: 100%;
-	overflow: auto;
 	padding: 1.6em;
+	overflow: auto;
+	max-width: 100%;
 }
 code, kbd, tt, var {
 	font: 15px Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
@@ -283,7 +282,6 @@ input::-moz-focus-inner { /* Corrects inner padding and border displayed oddly i
 }
 input[type="text"],
 input[type="email"],
-input[type="url"],
 input[type="password"],
 input[type="search"],
 textarea {
@@ -293,7 +291,6 @@ textarea {
 }
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="url"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
 textarea:focus {
@@ -301,7 +298,6 @@ textarea:focus {
 }
 input[type="text"],
 input[type="email"],
-input[type="url"],
 input[type="password"],
 input[type="search"] {
 	padding: 3px;
@@ -373,26 +369,17 @@ a:active {
 /* Clearing */
 .clear:before,
 .clear:after,
-.entry-content:before,
-.entry-content:after,
-.comment-content:before,
-.comment-content:after,
-.site-header:before,
-.site-header:after,
-.site-content:before,
-.site-content:after,
-.site-footer:before,
-.site-footer:after {
+[class*="content"]:before,
+[class*="content"]:after,
+[class*="site"]:before,
+[class*="site"]:after {
 	content: '';
 	display: table;
 }
 
 .clear:after,
-.entry-content:after,
-.comment-content:after,
-.site-header:after,
-.site-content:after,
-.site-footer:after {
+[class*="content"]:after,
+[class*="site"]:after {
 	clear: both;
 }
 
@@ -423,9 +410,9 @@ a:active {
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 	display: none;
 	float: left;
-	left: 0;
 	position: absolute;
-	top: 1.5em;
+		top: 1.5em;
+		left: 0;
 	z-index: 99999;
 }
 .main-navigation ul ul ul {
@@ -452,8 +439,8 @@ a:active {
 
 /* Small menu */
 .menu-toggle {
-	cursor: pointer;
 	display: none;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
@@ -531,22 +518,22 @@ a:active {
 .wp-caption .wp-caption-text {
 	margin: 0.8075em 0;
 }
-.site-main .gallery {
+.site-content .gallery {
 	margin-bottom: 1.5em;
 }
 .gallery-caption {
 }
-.site-main .gallery a img {
+.site-content .gallery a img {
 	border: none;
 	height: auto;
 	max-width: 90%;
 }
-.site-main .gallery dd {
+.site-content .gallery dd {
 	margin: 0;
 }
-.site-main .gallery-columns-4 .gallery-item {
+.site-content .gallery-columns-4 .gallery-item {
 }
-.site-main .gallery-columns-4 .gallery-item img {
+.site-content .gallery-columns-4 .gallery-item img {
 }
 
 /* Make sure embeds and iframes fit their containers */
@@ -560,7 +547,7 @@ object {
 /* =Navigation
 ----------------------------------------------- */
 
-.site-main [class*="navigation"] {
+.site-content [class*="navigation"] {
 	margin: 0 0 1.5em;
 	overflow: hidden;
 }
@@ -574,7 +561,6 @@ object {
 	width: 50%;
 }
 
-
 /* =Comments
 ----------------------------------------------- */
 
@@ -583,7 +569,6 @@ object {
 }
 .bypostauthor {
 }
-
 
 /* =Widgets
 ----------------------------------------------- */
@@ -601,7 +586,6 @@ object {
 .widget_search .search-submit {
 	display: none;
 }
-
 
 /* =Infinite Scroll
 ----------------------------------------------- */

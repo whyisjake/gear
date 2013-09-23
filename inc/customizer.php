@@ -1,8 +1,8 @@
 <?php
 /**
- * Gear Theme Customizer
+ * web2feel Theme Customizer
  *
- * @package Gear
+ * @package web2feel
  */
 
 /**
@@ -10,17 +10,17 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function gear_customize_register( $wp_customize ) {
+function web2feel_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 }
-add_action( 'customize_register', 'gear_customize_register' );
+add_action( 'customize_register', 'web2feel_customize_register' );
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-function gear_customize_preview_js() {
-	wp_enqueue_script( 'gear_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20130508', true );
+function web2feel_customize_preview_js() {
+	wp_enqueue_script( 'web2feel_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20130508', true );
 }
-add_action( 'customize_preview_init', 'gear_customize_preview_js' );
+add_action( 'customize_preview_init', 'web2feel_customize_preview_js' );

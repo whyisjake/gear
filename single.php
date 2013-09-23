@@ -2,19 +2,38 @@
 /**
  * The Template for displaying all single posts.
  *
- * @package Gear
+ * @package web2feel
  */
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+<div class="page-head">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<?php 
+				$port_cat =of_get_option('w2f_portfolio');
+				if (in_category($port_cat)) { ?>
+				<h3> Portfolio item </h3> 
+				<p> Project item from your portfolio</p>
+				<?php } else { ?>
+				<h3> Blog post </h3> 
+				<p> Article from your blog</p>
+				<?php } ?>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="container">	
+	<div class="row">
+	<div id="primary" class="content-area col-sm-8">
 		<main id="main" class="site-main" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
 			<?php get_template_part( 'content', 'single' ); ?>
-
-			<?php gear_content_nav( 'nav-below' ); ?>
 
 			<?php
 				// If comments are open or we have at least one comment, load up the comment template
@@ -28,4 +47,6 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
+	</div>
+</div>
 <?php get_footer(); ?>

@@ -58,17 +58,18 @@ class GEAR_WP_CLI_Command extends WP_CLI_Command {
 				);
 			WP_CLI::line('Setting up ' . get_the_title( $id ) );
 			WP_CLI::line('| Post ID ' . $id );
-			$sku = add_post_meta( $id, $key, $products->SKU );
-			WP_CLI::line('| Post SKU' . ( $sku ) ? get_post_meta( $id, 'SKU', true ) : 'Nope...' );
-			// foreach ( $keys as $key ) {
-			// 	WP_CLI::line( $products->$key );
-			// 	$meta = update_post_meta( $id, $key, $products->$key, true );
-			// 	if ( $meta ) {
-			// 		WP_CLI::success( $key );
-			// 	} else {
-			// 		WP_CLI::warning( 'Didn\'t add ' . $key );
-			// 	}
-			// }
+			// WP_CLI::line('| Post SKU' . ( $sku ) ? get_post_meta( $id, 'SKU', true ) : 'Nope...' );
+			foreach ( $keys as $key ) {
+				WP_CLI::line( '| ' . $key );
+				WP_CLI::line( '| ' . $products->$key );
+				$meta = ( !empty( $products->$key ) ) ? add_post_meta( $id, $key, (string) $products->$key ) : null;
+				// $meta = update_post_meta( $id, $key, $products->$key, true );
+				if ( $meta ) {
+					WP_CLI::success( $products->$key );
+				} else {
+					WP_CLI::warning( 'Didn\'t add ' . $key );
+				}
+			}
 
 		}
 	}

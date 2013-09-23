@@ -7,12 +7,26 @@
  * and that other 'pages' on your WordPress site will use a
  * different template.
  *
- * @package Gear
+ * @package web2feel
  */
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+<div class="page-head">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h3> <?php the_title(); ?> </h3>
+				<p> </p>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="container">	
+	<div class="row">
+	<div id="primary" class="content-area col-sm-8">
 		<main id="main" class="site-main" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -31,4 +45,6 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
+	</div>
+</div>
 <?php get_footer(); ?>

@@ -2,22 +2,40 @@
 /**
  * The template for displaying the footer.
  *
- * Contains the closing of the #content div and all content after
+ * Contains the closing of the id=main div and all content after
  *
- * @package Gear
+ * @package web2feel
  */
 ?>
 
 	</div><!-- #content -->
+	
+	<div id="bottom">
+		<div class="container">
+			<div class="row">
+			
+			<?php if ( !function_exists('dynamic_sidebar')
+			        || !dynamic_sidebar("Footer") ) : ?>  
+			<?php endif; ?>
+			
+			
+			</div>
+		</div>
+	</div>
+	
+	
+<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="container">
+		<div class="site-info wrap row">
+			<div class="fcred col-12">
+				Copyright &copy; <?php echo date('Y');?> <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>"><?php bloginfo('name'); ?></a> - <?php bloginfo('description'); ?>.<br />
+				<?php fflink(); ?> | <a href="http://topwpthemes.com/<?php echo wp_get_theme(); ?>/" ><?php echo wp_get_theme(); ?> Theme</a> 	
+			</div>		
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<?php do_action( 'gear_credits' ); ?>
-			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'gear' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s', 'gear' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'gear' ), 'Gear', '<a href="http://underscores.me/" rel="designer">Jake</a>' ); ?>
 		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+	</div>	
+</footer><!-- #colophon .site-footer -->
+
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
