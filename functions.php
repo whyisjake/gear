@@ -169,5 +169,10 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/jetpack.php';
 
-
-/* Credits */
+/**
+ * Load Gear post-type file.
+ */
+require get_template_directory() . '/post-types/gear.php';
+ 
+if ( defined( 'WP_CLI' ) && WP_CLI )
+  include_once dirname( __FILE__ ) . '/inc/wp-cli/wp-cli.php';
